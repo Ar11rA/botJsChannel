@@ -1,0 +1,1 @@
+Designing a bot which can move around in a given grid according to a set of instructions.
