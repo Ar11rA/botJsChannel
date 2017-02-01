@@ -2,6 +2,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var botMain = require('../botMainProgram');
 describe('when valid input is given through a text file', function () {
+  
   it('should return an object when valid set of arguments are given in the file fileCommands.txt', function () {
     // var fileContents = `10 20 
     // 2 2 N 
@@ -10,6 +11,7 @@ describe('when valid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return an object when valid set of arguments are given in the file fileCommands.txt and take care of the lower boundaries in the grid', function () {
     // var fileContents = `10 20 
     // 2 2 N 
@@ -18,6 +20,7 @@ describe('when valid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return an object and continue processing even if lower boundary is touched by the bot', function () {
     // var fileContents = `10 20 
     // 2 2 N 
@@ -26,6 +29,7 @@ describe('when valid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return an object and continue processing even if upper boundary is touched by the bot', function () {
     // var fileContents = `10 20 
     // 18 18 S
@@ -37,6 +41,7 @@ describe('when valid input is given through a text file', function () {
 });
 
 describe('when invalid input is given through a text file', function () {
+
   it('should return error message when the grid x coordinate is not a munber', function () {
     // var fileContents = `a 20 
     // 18 18 S
@@ -45,6 +50,7 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return error message when the grid y coordinate is not a munber', function () {
     // var fileContents = `20 b 
     // 18 18 S
@@ -53,6 +59,7 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return error message when the starting coordinate x is not a munber', function () {
     // var fileContents = `10 20 
     // a 18 S
@@ -61,6 +68,7 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return error message when the starting coordinate y is not a munber', function () {
     // var fileContents = `a 20 
     // 18 b S
@@ -69,6 +77,7 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return error message when the grid coordinates are more than two', function () {
     // var fileContents = `10 20 30 
     // 18 18 S
@@ -77,6 +86,7 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
   it('should return error message when the starting coordinates has more number of arguments', function () {
     // var fileContents = `a 20 
     // 18 18 S 25
@@ -85,20 +95,50 @@ describe('when invalid input is given through a text file', function () {
     var actualOutput = botMain();
     assert.deepEqual(actualOutput, expectedOutput);
   });
-    it('should return error message when the instructions given in the command has anything other than l, m or r', function () {
-      // var fileContents = `10 20 
-      // 18 18 S 
-      // mmmrmmmlmmmlmmaaaaaaa`;
-      var expectedOutput = 'The instrcution contains some invalid inputs. Please make sure that input only contains the letters M, L or R.';
-      var actualOutput = botMain();
-      assert.deepEqual(actualOutput, expectedOutput);
-    });
-    it('should return error message when starting x coordinate exceeds grid x coordinate', function () {
-      // var fileContents = `19 20 
-      // 45 18 S 
-      // mmmrmmmlmmm`;
-      var expectedOutput = 'The bot cannot start at this X co ordinate. This is greater than given grid size.';
-      var actualOutput = botMain();
-      assert.deepEqual(actualOutput, expectedOutput);
-    });
+
+  it('should return error message when the instructions given in the command has anything other than l, m or r', function () {
+    // var fileContents = `10 20 
+    // 18 18 S 
+    // mmmrmmmlmmmlmmaaaaaaa`;
+    var expectedOutput = 'The instrcution contains some invalid inputs. Please make sure that input only contains the letters M, L or R.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
   });
+
+  it('should return error message when starting x coordinate exceeds grid x coordinate', function () {
+    // var fileContents = `19 20 
+    // 45 18 S 
+    // mmmrmmmlmmm`;
+    var expectedOutput = 'The bot cannot start at this X co ordinate. This is greater than given grid size.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return error message when starting y coordinate exceeds grid x coordinate', function () {
+    // var fileContents = `19 20 
+    // 45 18 S 
+    // mmmrmmmlmmm`;
+    var expectedOutput = 'The bot cannot start at this Y co ordinate. This is greater than given grid size.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return error message when starting x coordinate is less than zero', function () {
+    // var fileContents = `19 20 
+    // -5 18 S 
+    // mmmrmmmlmmm`;
+    var expectedOutput = 'The bot cannot start at this X co ordinate. This is greater than given grid size.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return error message when starting y coordinate is less than zero', function () {
+    // var fileContents = `19 20 
+    // 45 -9 S 
+    // mmmrmmmlmmm`;
+    var expectedOutput = 'The bot cannot start at this X co ordinate. This is greater than given grid size.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
