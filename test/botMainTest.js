@@ -142,3 +142,18 @@ describe('when invalid input is given through a text file', function () {
   });
 });
 
+describe('when invalid directory or file format is given', function () {
+
+  it('should return error message when the directory is wrong', function () {
+    var expectedOutput = 'The file does not exist in the following path';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+   it('should return error message when the file format is wrong', function () {
+    var expectedOutput = 'The file is not a text file. Please check again.';
+    var actualOutput = botMain();
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+});
